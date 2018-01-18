@@ -1,0 +1,81 @@
+// stylelint-disable
+html {
+    font-size: 16px;
+}
+
+body {
+    font-family: $font-family;
+}
+
+// clear paddings margins and make as box-sizing:
+body, h1, h2, h3, h4, h5, h6, hr, p, blockquote,
+dl, dt, dd, ul, ol, li,
+pre,
+fieldset, lengend, button, input, textarea,
+th, td,
+div, span {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+fieldset, lengend, button, input, textarea, a {
+    outline: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+// autofill reset
+input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
+    box-shadow: 0 0 0 30px white inset;
+}
+
+// default font and color:
+body, button, input, select, textarea {
+    font-family: $font-family;
+    color: $color-text-black;
+}
+
+a {
+    color: $color-primary;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+// headers
+h1 {
+    font-size: 2.4rem;
+}
+
+h2 {
+    font-size: 2rem;
+}
+
+h3 {
+    font-size: 1.6rem;
+}
+
+h4 {
+    font-size: 1.2rem;
+}
+
+h5 {
+    font-size: 0.8rem;
+}
+
+h6 {
+    font-size: 0.4rem;
+}
+
+body {
+    font-size: 1.6rem;
+}
+
+ul {
+    list-style-type: none;
+}
+
+@media screen and (max-width: 412px) {
+    html {
+        font-size: 10px;
+    }
+}
