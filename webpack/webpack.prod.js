@@ -1,3 +1,4 @@
+/* eslint-disable */
 const path = require('path')
 const webpack = require('webpack')
 const merge = require('webpack-merge')
@@ -12,7 +13,7 @@ const VENDOR_LIBS = [
 module.exports = merge(common, {
     entry: {
         vendor: VENDOR_LIBS,
-        app: path.resolve(__dirname, '../src/App.jsx')
+        app: path.resolve(__dirname, '../src/Main.jsx')
     },
     module: {
         rules: [
