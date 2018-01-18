@@ -7,7 +7,6 @@ import 'styles/styles.scss'
 const root = document.getElementById('app')
 // console.log(App)
 
-// ReactDOM.render(<App />, root)
 const render = (Component) => {
     ReactDOM.render(
         <AppContainer>
