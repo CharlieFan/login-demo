@@ -13,19 +13,15 @@ export default class Home extends React.Component {
                 value: '',
                 isValid: false
             }
-        }
+        },
+        something: true
     }
 
     handleChange(value, name) {
+        let data = this.state.formData
+        data[name].value = value
         this.setState({
-            ...this.state,
-            formData: {
-                ...this.state.formData,
-                [name]: {
-                    ...this.state.formData[name],
-                    [name]: value
-                }
-            }
+            formData: data
         })
     }
 
@@ -34,7 +30,7 @@ export default class Home extends React.Component {
     }
 
     validate(value, name) {
-        console.log(value, name)
+        console.log(`${name}: ${value}`)
     }
 
 
