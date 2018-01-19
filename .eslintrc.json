@@ -21,7 +21,10 @@
     "rules": {
         "indent": [
             "error",
-            4
+            4,
+            {
+                "SwitchCase": 1
+            }
         ],
         "linebreak-style": [
             "error",
@@ -34,6 +37,7 @@
         "semi": [
             "error",
             "never"
-        ]
+        ],
+        "no-console": ["off"]
     }
 }
