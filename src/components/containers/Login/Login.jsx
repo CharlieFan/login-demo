@@ -16,6 +16,19 @@ export default class Home extends React.Component {
         }
     }
 
+    handleChange(value, name) {
+        this.setState({
+            ...this.state,
+            formData: {
+                ...this.state.formData,
+                [name]: {
+                    ...this.state.formData[name],
+                    [name]: value
+                }
+            }
+        })
+    }
+
     handleSubmit() {
         console.log(this.state)
     }
@@ -42,15 +55,22 @@ export default class Home extends React.Component {
                             }
                             placeholder="Enter email" 
                             onChange={(e) => {
-                                console.log(e.target.value)
+                                this.handleChange(e.target.value, e.target.name)
                             }} 
                             onBlur={(e) => {
                                 this.validate(e.target.value, e.target.name)
-                            }}/>
+                            }} />
 
                         <input type="password"
+                            name="password"
                             className="form-control form-control-lg mb-3"
-                            placeholder="Enter password" />
+                            placeholder="Enter password" 
+                            onChange={(e) => {
+                                this.handleChange(e.target.value, e.target.name)
+                            }} 
+                            onBlur={(e) => {
+                                this.validate(e.target.value, e.target.name)
+                            }} />
 
                         <button type="submit"
                             className="btn btn-primary btn-lg w-100 mb-3">Login</button>
