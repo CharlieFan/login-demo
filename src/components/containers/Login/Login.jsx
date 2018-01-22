@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { Input } from 'components/ui'
 import styles from './Login.scss'
 import {validator, validateRules} from 'utils/validation'
 
@@ -11,61 +12,72 @@ export default class Home extends React.Component {
             email: {
                 value: '',
                 isValid: false,
-                err: ''
+                touched: false,
+                rules: [
+                    validateRules.required,
+                    validateRules.isEmail
+                ],
+                errMsg: ''
             },
             password: {
                 value: '',
+                touched: false,
                 isValid: false,
-                err: ''
+                rules: [
+                    validateRules.required
+                ],
+                errMsg: ''
             }
-        }
+        },
     }
 
-    handleChange(value, name) {
+    handleChange = (value, name) => {
         let data = {...this.state.formData}
+        if (!this.state.formData[name].touched) {
+            data[name].touched = true
+        }
+
         data[name].value = value
         this.setState({
             formData: data
         })
     }
 
-    handleSubmit() {
-        console.log(this.state)
-    }
-
-    async validate(value, name) {
-        // console.log(`${name}: ${value}`)
-        switch (name) {
-            case 'email':
-                try {
-                    await validator(value , validateRules.required, validateRules.isEmail)
-                    let data = {...this.state.formData}
-                    data.email.isValid = true
-                    this.setState({
-                        formData: data
-                    })
-                } catch (err) {
-                    // console.log(err.message)
-                    let data = {...this.state.formData}
-                    data.email.isValid = false
-                    data.email.err = `${name} ${err.message}`
-                    this.setState({
-                        formData: data
-                    })
-                }
-                break
-            case 'password':
-                try {
-                    await validator(value , validateRules.required, validateRules.minLength(6), validateRules.maxLength(24))
-                } catch (err) {
-                    console.log(err.message)
-                }
-                break
-            default:
-                return 
+    validate = async (value, name, rules) => {
+        let data = {...this.state.formData}
+        if (!this.state.formData[name].touched) {
+            data[name].touched = true
+        }
+        try {
+            await validator(value, ...rules)
+            data[name].errMsg = ''
+            data[name].isValid = true
+            this.setState({
+                formData: data
+            })
+            return true
+        } catch (err) {
+            data[name].isValid = false
+            data[name].errMsg = err.message
+            this.setState({
+                formData: data
+            })
+            return false
         }
     }
-
+    
+    async validateForm() {
+        let flag1 = await this.validate(this.state.formData.email.value, 'email', this.state.formData.email.rules)
+        let flag2 = await this.validate(this.state.formData.password.value, 'password', this.state.formData.password.rules)
+        
+        return flag1 && flag2
+    }
+    
+    async handleSubmit() {
+        if (! await this.validateForm()) return false
+        console.log(this.state)
+    }
+    
 
     render() {
         return (
@@ -76,37 +88,27 @@ export default class Home extends React.Component {
                         e.preventDefault()
                         this.handleSubmit()
                     }}>
-                        <div className="input-group mb-3">
-                            <input type="email"
-                                name="email"
-                                className={
-                                    `form-control form-control-lg ${ this.state.formData.email.isValid ? '' : 'is-invalid'}`
-                                }
-                                placeholder="Enter email" 
-                                onChange={(e) => {
-                                    this.handleChange(e.target.value, e.target.name)
-                                }} 
-                                onBlur={(e) => {
-                                    this.validate(e.target.value, e.target.name)
-                                }} />
+                        <Input placeholder="Enter Your Email"
+                            type="text"
+                            className="mb-3"
+                            name="email"
+                            touched={this.state.formData.email.touched}
+                            hasErr={!this.state.formData.email.isValid}
+                            errMsg={this.state.formData.email.errMsg}
+                            onChange={this.handleChange}
+                            onBlur={this.validate}
+                            rules={[...this.state.formData.email.rules]} />
 
-                            <p className="invalid-feedback">
-                                {this.state.formData.email.err}
-                            </p>
-                        </div>
-
-                        <div className="input-group mb-3">
-                            <input type="password"
-                                name="password"
-                                className="form-control form-control-lg mb-3"
-                                placeholder="Enter password" 
-                                onChange={(e) => {
-                                    this.handleChange(e.target.value, e.target.name)
-                                }} 
-                                onBlur={(e) => {
-                                    this.validate(e.target.value, e.target.name)
-                                }} />
-                        </div>
+                        <Input placeholder="Enter Your Password"
+                            type="password"
+                            className="mb-3"
+                            name="password"
+                            touched={this.state.formData.password.touched}
+                            hasErr={!this.state.formData.password.isValid}
+                            errMsg={this.state.formData.password.errMsg}
+                            onChange={this.handleChange}
+                            onBlur={this.validate}
+                            rules={[...this.state.formData.password.rules]} />
 
                         <button type="submit"
                             className="btn btn-primary btn-lg w-100 mb-3">Login</button>

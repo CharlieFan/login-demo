@@ -15,7 +15,7 @@ const validateRules = {
             if (pattern.test(value)) {
                 resolve(true)
             } else {
-                reject(new Error('is invalid email format'))
+                reject(new Error('is in invalid email format'))
             }
         })
     },
