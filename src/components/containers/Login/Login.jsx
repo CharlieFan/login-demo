@@ -43,13 +43,13 @@ export default class Home extends React.Component {
         })
     }
 
-    validate = async (value, name, rules) => {
+    validate = async (value, name) => {
         let data = {...this.state.formData}
         if (!this.state.formData[name].touched) {
             data[name].touched = true
         }
         try {
-            await validator(value, ...rules)
+            await validator(value, ...this.state.formData[name].rules)
             data[name].errMsg = ''
             data[name].isValid = true
             this.setState({
@@ -67,15 +67,21 @@ export default class Home extends React.Component {
     }
     
     async validateForm() {
-        let flag1 = await this.validate(this.state.formData.email.value, 'email', this.state.formData.email.rules)
-        let flag2 = await this.validate(this.state.formData.password.value, 'password', this.state.formData.password.rules)
+        let flag1 = await this.validate(this.state.formData.email.value, 'email')
+        let flag2 = await this.validate(this.state.formData.password.value, 'password')
         
         return flag1 && flag2
     }
     
     async handleSubmit() {
         if (! await this.validateForm()) return false
-        console.log(this.state)
+        let {email, password} = this.state.formData
+        let formData = {
+            email: email.value,
+            password: password.value
+        }
+
+        console.log(formData)
     }
     
 
@@ -96,8 +102,7 @@ export default class Home extends React.Component {
                             hasErr={!this.state.formData.email.isValid}
                             errMsg={this.state.formData.email.errMsg}
                             onChange={this.handleChange}
-                            onBlur={this.validate}
-                            rules={[...this.state.formData.email.rules]} />
+                            onBlur={this.validate} />
 
                         <Input placeholder="Enter Your Password"
                             type="password"
@@ -107,8 +112,7 @@ export default class Home extends React.Component {
                             hasErr={!this.state.formData.password.isValid}
                             errMsg={this.state.formData.password.errMsg}
                             onChange={this.handleChange}
-                            onBlur={this.validate}
-                            rules={[...this.state.formData.password.rules]} />
+                            onBlur={this.validate} />
 
                         <button type="submit"
                             className="btn btn-primary btn-lg w-100 mb-3">Login</button>

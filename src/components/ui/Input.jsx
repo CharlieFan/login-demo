@@ -1,6 +1,5 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { validator } from 'utils/validation'
 
 export default class Home extends React.Component {
     static defaultProps = {
@@ -10,39 +9,16 @@ export default class Home extends React.Component {
         errMsg: ''
     }
 
-    // state = {
-    //     touched: false,
-    //     hasErr: false,
-    //     errMsg: ''
-    // }
-
-
     handleChange = (e) => {
         let {name, value} = e.target
 
         this.props.onChange(value, name)
     }
 
-    // async validate(value, name) {
-    //     try {
-    //         await validator(value, ...this.props.rules)
-    //         this.setState({
-    //             hasErr: false
-    //         })
-    //         this.props.onBlur(true, name)
-    //     } catch (err) {
-    //         this.setState({
-    //             hasErr: true,
-    //             errMsg: err.message
-    //         })
-    //         this.props.onBlur(false, name)
-    //     }
-    // }
-
     handleBlur = (e) => {
         let value = e.target.value
         let name = e.target.name
-        this.props.onBlur(value, name, this.props.rules)
+        this.props.onBlur(value, name)
     }
 
 
@@ -68,10 +44,6 @@ export default class Home extends React.Component {
             </div>
         )
     }
-    
-    componentDidMount() {
-        console.log(this.props)
-    }
 }
 
 Home.propTypes = {
@@ -85,7 +57,6 @@ Home.propTypes = {
     max: PropTypes.number,
     min: PropTypes.number,
     // Validation related below:
-    rules: PropTypes.array,
     className: PropTypes.string,
     touched: PropTypes.bool,
     hasErr: PropTypes.bool,
