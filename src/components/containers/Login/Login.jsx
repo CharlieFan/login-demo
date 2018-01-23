@@ -4,9 +4,49 @@ import { Input } from 'components/ui'
 import styles from './Login.scss'
 import {validator, validateRules} from 'utils/validation'
 
-// console.log(validateRules.maxLength(6)('a')s)
+export default class Login extends React.Component {
+    render() {
+        return (
+            <div className={styles.login_view}>
+                <div className={styles.form_wrapper}>
+                    <h1>Login</h1>
+                    <form onSubmit={(e) => {
+                        e.preventDefault()
+                        this.handleSubmit()
+                    }}>
+                        <Input placeholder="Enter Your Email"
+                            type="text"
+                            className="mb-3"
+                            name="email"
+                            data-name="Email"
+                            touched={this.state.formData.email.touched}
+                            hasErr={!this.state.formData.email.isValid}
+                            errMsg={this.state.formData.email.errMsg}
+                            onChange={this.handleChange}
+                            onBlur={this.validate} />
+    
+                        <Input placeholder="Enter Your Password"
+                            type="password"
+                            className="mb-3"
+                            name="password"
+                            data-name="Password"
+                            touched={this.state.formData.password.touched}
+                            hasErr={!this.state.formData.password.isValid}
+                            errMsg={this.state.formData.password.errMsg}
+                            onChange={this.handleChange}
+                            onBlur={this.validate} />
+    
+                        <button type="submit"
+                            className="btn btn-primary btn-lg w-100 mb-3">Login</button>
+                        <Link to="/signup">
+                            Sign Up Now
+                        </Link>
+                    </form>
+                </div>
+            </div>
+        )
+    }
 
-export default class Home extends React.Component {
     state = {
         formData: {
             email: {
@@ -82,46 +122,5 @@ export default class Home extends React.Component {
         }
 
         console.log(formData)
-    }
-    
-
-    render() {
-        return (
-            <div className={styles.login_view}>
-                <div className={styles.form_wrapper}>
-                    <h1>Login</h1>
-                    <form onSubmit={(e) => {
-                        e.preventDefault()
-                        this.handleSubmit()
-                    }}>
-                        <Input placeholder="Enter Your Email"
-                            type="text"
-                            className="mb-3"
-                            name="email"
-                            touched={this.state.formData.email.touched}
-                            hasErr={!this.state.formData.email.isValid}
-                            errMsg={this.state.formData.email.errMsg}
-                            onChange={this.handleChange}
-                            onBlur={this.validate} />
-
-                        <Input placeholder="Enter Your Password"
-                            type="password"
-                            className="mb-3"
-                            name="password"
-                            touched={this.state.formData.password.touched}
-                            hasErr={!this.state.formData.password.isValid}
-                            errMsg={this.state.formData.password.errMsg}
-                            onChange={this.handleChange}
-                            onBlur={this.validate} />
-
-                        <button type="submit"
-                            className="btn btn-primary btn-lg w-100 mb-3">Login</button>
-                        <Link to="/signup">
-                            Sign Up Now
-                        </Link>
-                    </form>
-                </div>
-            </div>
-        )
     }
 }

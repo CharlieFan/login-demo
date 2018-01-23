@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-export default class Home extends React.Component {
+export default class Input extends React.Component {
     static defaultProps = {
         type: 'text',
         touched: false,
@@ -16,6 +16,7 @@ export default class Home extends React.Component {
     }
 
     handleBlur = (e) => {
+        if (!this.props.onBlur) return false
         let value = e.target.value
         let name = e.target.name
         this.props.onBlur(value, name)
@@ -24,11 +25,11 @@ export default class Home extends React.Component {
 
     render() {
         return (
-            <div className={`input-group ${this.props.className}`}>
+            <div className={`${this.props.className}`}>
                 <input type={this.props.type}
                     name={this.props.name}
                     className={
-                        `form-control form-control-lg ${this.props.hasErr && this.props.touched ? 'is-invalid' : ''}`
+                        `form-control form-control-lg ${this.props.hasErr && this.props.errMsg ? 'is-invalid' : ''}`
                     }
                     placeholder={this.props.placeholder}
                     onChange={this.handleChange}
@@ -39,15 +40,19 @@ export default class Home extends React.Component {
                     minLength={this.props.minLength} />
 
                 <p className="invalid-feedback">
-                    {`${this.props.name} ${this.props.errMsg}`}
+                    {`${this.props['data-name'] ?
+                        this.props['data-name'] :
+                        this.props.name} ${this.props.errMsg}`
+                    }
                 </p>
             </div>
         )
     }
 }
 
-Home.propTypes = {
+Input.propTypes = {
     type: PropTypes.string,
+    'data-name': PropTypes.string,
     name: PropTypes.string.isRequired,
     placeholder: PropTypes.string,
     onChange: PropTypes.func,
