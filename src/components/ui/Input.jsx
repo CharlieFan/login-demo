@@ -56,7 +56,6 @@ Home.propTypes = {
     minLength: PropTypes.number,
     max: PropTypes.number,
     min: PropTypes.number,
-    // Validation related below:
     className: PropTypes.string,
     touched: PropTypes.bool,
     hasErr: PropTypes.bool,
