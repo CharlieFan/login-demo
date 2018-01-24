@@ -143,11 +143,25 @@ export default class Signup extends React.Component {
         }
     }
 
-    async handleSubmit() {
-        let flag1 = await this.validate(this.state.formData.email.value, 'email')
-        let flag2 = await this.validate(this.state.formData.password.value, 'password')
-        let flag3 = await this.validate(this.state.formData.confirm.value, 'confirm')
+    async validateForm() {
+        let flag = []
 
-        return flag1 && flag2 && flag3
+        for (let prop in this.state.formData) {
+            if (prop) {
+                flag.push(await this.validate(this.state.formData[prop].value, prop))
+            }
+        }
+
+        return flag.reduce((prev, curr) => {
+            return curr && prev
+        })
+    }
+
+    async handleSubmit() {
+        if (!await this.validateForm()) {
+            return false
+        }
+
+        console.log('call api')
     }
 }
