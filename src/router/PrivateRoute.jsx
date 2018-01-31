@@ -2,16 +2,25 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Route, Switch, Redirect } from 'react-router-dom'
 import Home from 'components/containers/Home/Home'
+import { Topbar } from 'components/ui'
+
+const userinfo = {
+    name: 'UserName',
+    email: 'username@example.com'
+}
 
 const routes = (props) => {
     return (
-        <Switch>
-            <Route path={props.match.url + '/home'}
-                component={Home} />
+        <div>
+            <Topbar userInfo={userinfo} />
+            <Switch>
+                <Route path={props.match.url + '/home/:id'}
+                    component={Home} />
 
-            <Redirect from="/main"
-                to="/main/home"/>
-        </Switch>
+                <Redirect from="/main"
+                    to="/main/home"/>
+            </Switch>
+        </div>
     )
 }
 

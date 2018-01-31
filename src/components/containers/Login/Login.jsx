@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import { Input } from 'components/ui'
 import styles from './Login.scss'
@@ -122,5 +123,14 @@ export default class Login extends React.Component {
         }
 
         console.log(formData)
+        let id = 1
+        this.props.history.push({
+            pathname: '/main/home/' + id
+        })
     }
+}
+
+
+Login.propTypes = {
+    history: PropTypes.object
 }
