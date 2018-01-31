@@ -1,6 +1,7 @@
 import React from 'react'
+import { connect } from 'react-redux'
 
-export default class Home extends React.Component {
+class Home extends React.Component {
     componentDidMount() {
         console.log(this.props)
     }
@@ -13,3 +14,19 @@ export default class Home extends React.Component {
         )
     }
 }
+
+const mapStateToProps = (state) => {
+    return {
+        todos: state.todos
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        addNewItem() {
+            return dispatch({type: 'ADD_ITEM'})
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home)

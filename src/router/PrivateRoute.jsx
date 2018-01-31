@@ -9,16 +9,19 @@ const userinfo = {
     email: 'username@example.com'
 }
 
+const styles = {
+    marginTop: '50px'
+}
+
 const routes = (props) => {
     return (
-        <div>
+        <div style={styles}>
             <Topbar userInfo={userinfo} />
             <Switch>
                 <Route path={props.match.url + '/home/:id'}
                     component={Home} />
 
-                <Redirect from="/main"
-                    to="/main/home"/>
+                {/* <Redirect from="/main" to="/main/home"/> */}
             </Switch>
         </div>
     )
