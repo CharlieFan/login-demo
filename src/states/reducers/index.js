@@ -4,6 +4,11 @@ const initState = {
             id: 1,
             text: 'shopping',
             isFinished: false
+        },
+        {
+            id: 2,
+            text: 'shopping',
+            isFinished: false
         }
     ]
 }

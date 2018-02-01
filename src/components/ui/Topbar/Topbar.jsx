@@ -3,14 +3,14 @@ import PropTypes from 'prop-types'
 import styles from './Topbar.scss'
 
 const Topbar = (props) => {
-    console.log(props)
+    // console.log(props)
     
     return (
         <div className={styles.topbar}>
-            <div></div>
             <div>
                 Hello! { props.userInfo.name}
             </div>
+            <div></div>
         </div>
     )
 }

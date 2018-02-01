@@ -14,7 +14,7 @@ const routes = () => {
             <Switch>
                 <Route path="/main" render={
                     (props) => {
-                        console.log(token)
+                        // console.log(token)
                         
                         if (token) {
                             return <PrivateRoute {...props} />
