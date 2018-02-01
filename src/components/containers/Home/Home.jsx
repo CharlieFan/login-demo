@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import styles from './Home.scss'
 
 class Home extends React.Component {
     componentDidMount() {
@@ -8,8 +9,21 @@ class Home extends React.Component {
 
     render() {
         return (
-            <div>
-                <h1>Home</h1>
+            <div className={styles.home_view}>
+                <ul>
+                    <li className="d-flex justify-content-between">
+                        <input type="checkbox"/>
+
+                        <p>
+                            Shopping
+                        </p>
+
+                        <div>
+                            <button className="btn btn-primary">Edit</button>
+                            <button className="btn btn-danger">Delete</button>
+                        </div>
+                    </li>
+                </ul>
             </div>
         )
     }

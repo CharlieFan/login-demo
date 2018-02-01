@@ -1,0 +1,21 @@
+@import "base/base";
+
+.home_view {
+    ul {
+        width: 100%;
+        padding: 30px;
+        margin: 0 auto;
+    }
+
+    li {
+        align-items: center;
+        padding: 15px;
+        border-radius: 4px;
+        box-shadow: 1px 1px 30px 2px rgba(0, 0, 0, 0.5);
+
+        button {
+            width: 4.5rem;
+            margin-left: 5px;
+        }
+    }
+}
