@@ -45,7 +45,7 @@ module.exports = merge(common, {
                                 localIdentName: '[name]__[local]___[hash:base64:5]'
                             }
                         },
-                        'postcss-loaderdd'
+                        'postcss-loader'
                     ]
                 })
             },
