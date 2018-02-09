@@ -91,10 +91,7 @@ module.exports = merge(common, {
                     {
                         loader: 'sass-loader',
                         options: {
-                            sourceMap: true,
-                            includePaths: [
-                                path.resolve(__dirname, '../src/styles')
-                            ]
+                            sourceMap: true
                         }
                     }
                 ]

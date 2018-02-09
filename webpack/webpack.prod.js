@@ -6,6 +6,17 @@ const common = require('./webpack.common')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
+// Create different css.
+
+const extractVenderCss = new ExtractTextPlugin({
+    filename: 'vender.css',
+    allChunks: true
+})
+const extractStyles = new ExtractTextPlugin({
+    filename: 'styles.css',
+    allChunks: true
+})
+
 const VENDOR_LIBS = [
     'react', 'react-dom', 'react-router-dom', 'redux'
 ]
@@ -24,53 +35,24 @@ module.exports = merge(common, {
             },
             {
                 test: /\.css$/,
-                use: ExtractTextPlugin.extract({
+                use: extractVenderCss.extract({
                     fallback: 'style-loader',
                     use: [
                         {
                             loader: 'css-loader',
                             options: {
-                                modules: true,
+                                module: true,
                                 localIdentName: '[name]__[local]___[hash:base64:5]'
                             }
                         },
-                        'postcss-loader'
+                        'postcss-loaderdd'
                     ]
                 })
             },
             {
-                test: /\.scss$/,
-                exclude: path.resolve(__dirname, '../src/styles'),
-                use: ExtractTextPlugin.extract({
-                    fallback: 'style-loader',
-                    use: [
-                        {
-                            loader: 'css-loader',
-                            options: {
-                                modules: true,
-                                importLoaders: 1,
-                                localIdentName: '[name]__[local]___[hash:base64:5]'
-                            }
-                        },
-                        {
-                            loader: 'resolve-url-loader'
-                        },
-                        {
-                            loader: 'sass-loader',
-                            options: {
-                                sourceMap: true,
-                                includePaths: [
-                                    path.resolve(__dirname, '../src/styles')
-                                ]
-                            }
-                        }
-                    ]
-                })
-            },
-            {
-                test: /\.scss$/,
+                test: /\.scss$/,  // only for styles in entry jsx
                 include: path.resolve(__dirname, '../src/styles'),
-                use: ExtractTextPlugin.extract({
+                use: extractVenderCss.extract({
                     fallback: 'style-loader',
                     use: [
                         {
@@ -90,7 +72,33 @@ module.exports = merge(common, {
                         }
                     ]
                 })
-            }
+            },
+            {
+                test: /\.scss$/, // deal with styles in different modules
+                exclude: path.resolve(__dirname, '../src/styles'), 
+                use: extractStyles.extract({
+                    fallback: 'style-loader',
+                    use: [
+                        {
+                            loader: 'css-loader',
+                            options: {
+                                modules: true,
+                                importLoaders: 2,
+                                localIdentName: '[name]__[local]___[hash:base64:5]'
+                            }
+                        },
+                        {
+                            loader: 'resolve-url-loader'
+                        },
+                        {
+                            loader: 'sass-loader',
+                            options: {
+                                sourceMap: true,
+                            }
+                        }
+                    ]
+                })
+            },
         ]
     },
     plugins: [
@@ -100,9 +108,7 @@ module.exports = merge(common, {
         new webpack.optimize.CommonsChunkPlugin({
             names: ['vendor', 'manifest']
         }),
-        new ExtractTextPlugin({
-            filename: 'styles.css',
-            allChunks: true
-        }) 
+        extractVenderCss,
+        extractStyles
     ]
 })
