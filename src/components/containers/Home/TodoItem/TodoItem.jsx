@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import { deleteItem, editItem, toggleItem } from 'states/actions'
 import styles from './TodoItem.scss'
 
 
@@ -13,7 +14,7 @@ class TodoItem extends React.Component {
 
         let saveBtn = (
             <button className="btn btn-success"
-                onClick={this.disableEdit}>Save</button>
+                onClick={this.editItem}>Save</button>
         )
 
         let editInput = (
@@ -24,9 +25,10 @@ class TodoItem extends React.Component {
 
         return (
             <li className={`d-flex justify-content-between ${styles.todo_item}`}>
-                <input type="checkbox"/>
+                <input type="checkbox" value={this.state.isFinished}
+                    onChange={this.toggoleFinish} />
 
-                <p>
+                <p className={this.props.item.isFinished ? styles.finished : ''}>
                     {
                         this.state.isEdit ?
                             editInput :
@@ -41,7 +43,8 @@ class TodoItem extends React.Component {
                             saveBtn :
                             editBtn
                     }
-                    <button className="btn btn-danger">Delete</button>
+                    <button className="btn btn-danger"
+                        onClick={this.deleteItem}>Delete</button>
                 </div>
             </li>
         )
@@ -50,7 +53,6 @@ class TodoItem extends React.Component {
     state = {
         text: this.props.item.text,
         isEdit: false,
-        isFinished: this.props.item.isFinished
     }
 
     handleChange = (value) => {
@@ -60,12 +62,12 @@ class TodoItem extends React.Component {
     }
 
     toggoleFinish = () => {
-        this.setState({
-            isFinished: !this.state.isFinished
-        })
+        this.props.toggleItem(this.props.item.id)
     }
 
     enableEdit = () => {
+        console.log(this.props.item.id)
+        
         this.setState({
             isEdit: true
         })
@@ -76,20 +78,37 @@ class TodoItem extends React.Component {
             isEdit: false
         })
     }
+    
+    deleteItem = () => {
+        this.props.deleteItem(this.props.item.id)
+    }
+
+    editItem = () => {
+        this.props.editItem(this.props.item.id, this.state.text)
+        this.disableEdit()
+    }
 }
 
 TodoItem.propTypes = {
-    item: PropTypes.object
+    item: PropTypes.object,
+    deleteItem: PropTypes.func,
+    editItem: PropTypes.func,
+    toggleItem: PropTypes.func,
 }
 
-// const mapDispatchToProps = (dispatch) => {
-//     return {
-//         addItem(item) {
-//             return dispatch(addItem(item))
-//         }
-//     }
-// }
+const mapDispatchToProps = (dispatch) => {
+    return {
+        deleteItem(id) {
+            return dispatch(deleteItem(id))
+        },
+        editItem(id, text) {
+            return dispatch(editItem({ id, text }))
+        },
+        toggleItem(id) {
+            return dispatch(toggleItem({ id }))
+        }
+    }
+}
 
 
-// export default connect({}, mapDispatchToProps)(TodoItem)
-export default TodoItem
+export default connect(null, mapDispatchToProps)(TodoItem)

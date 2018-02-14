@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import moment from 'moment'
 // Actions:
 import { addItem } from 'states/actions'
 import styles from './Home.scss'
@@ -20,9 +21,12 @@ class Home extends React.Component {
                     <div className="input-group-prepend">
                         <span className="input-group-text">Add New Item</span>
                     </div>
-                    <input type="text" className="form-control"/>
+                    <input type="text" className="form-control"
+                        value={this.state.text}
+                        onChange={(e) => { this.handleChange(e.target.value) }} />
                     <div className="input-group-append">
                         <button className="btn btn-primary"
+                            disabled={this.state.isLock}
                             onClick={this.add}>Add</button>
                     </div>
                 </div>
@@ -31,21 +35,39 @@ class Home extends React.Component {
         )
     }
 
+    state = {
+        text: '',
+        isLock: false
+    }
+
+    handleChange(value) {
+        this.setState({
+            text: value
+        })
+    }
+
     add = () => {
+        this.setState({
+            isLock: true
+        })
         let payload = {
-            id: 111,
-            text: 'hahahhaha',
+            id: moment().valueOf(),
+            text: this.state.text,
             isFinished: false
         }
 
         this.props.addNewItem(payload)
+        setTimeout(() => {
+            this.setState({
+                isLock: false
+            })
+        }, 200)
     }
 }
 
 const mapStateToProps = (state) => {
     return {
-        todos: state.todos,
-        everthing: state
+        todos: state.todos
     }
 }
 

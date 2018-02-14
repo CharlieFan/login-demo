@@ -1,10 +1,20 @@
-const addItem = (payload) => {
-    return {
-        type: 'ADD_ITEM',
-        payload
+function createAction(type) {
+    return function(payload) {
+        return {
+            type,
+            payload
+        }
     }
 }
 
+const addItem = createAction('ADD_ITEM')
+const deleteItem = createAction('DELETE_ITEM')
+const editItem = createAction('EDIT_ITEM')
+const toggleItem = createAction('TOGGLE_ITEM')
+
 export {
-    addItem
+    addItem,
+    deleteItem,
+    editItem,
+    toggleItem
 }

@@ -15,8 +15,7 @@ const initState = {
             text: 'Meeting with Jane Doe',
             isFinished: false
         }
-    ],
-    others: 'fjsklf'
+    ]
 }
 
 const reducer = (state = initState, action) => {
@@ -25,6 +24,42 @@ const reducer = (state = initState, action) => {
         case 'ADD_ITEM':
             copy.todos = copy.todos.concat([action.payload])
             return Object.assign({}, copy)
+        case 'DELETE_ITEM':
+            copy.todos = copy.todos.filter(item => {
+                return item.id !== action.payload
+            })
+            return Object.assign({}, copy)
+        case 'EDIT_ITEM': {
+            copy.todos = copy.todos.map(item => {
+                if (item.id === action.payload.id) {
+                    return {
+                        id: item.id,
+                        text: action.payload.text,
+                        isFinished: item.isFinished
+                    }
+                } else {
+                    return item
+                }
+            })
+
+            return Object.assign({}, copy)
+        }
+        case 'TOGGLE_ITEM': {
+            copy.todos = copy.todos.map(item => {
+                if (item.id === action.payload.id) {
+                    console.log(action.payload)
+                    return {
+                        id: item.id,
+                        text: item.text,
+                        isFinished: !item.isFinished
+                    }
+                } else {
+                    return item
+                }
+            })
+
+            return Object.assign({}, copy)
+        }
         default:
             return state
     }
