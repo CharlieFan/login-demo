@@ -47,7 +47,6 @@ const reducer = (state = initState, action) => {
         case 'TOGGLE_ITEM': {
             copy.todos = copy.todos.map(item => {
                 if (item.id === action.payload.id) {
-                    console.log(action.payload)
                     return {
                         id: item.id,
                         text: item.text,
