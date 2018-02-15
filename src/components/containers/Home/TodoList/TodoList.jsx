@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-// import { connect } from 'react-redux'
+import { connect } from 'react-redux'
 import styles from './TodoList.scss'
 
 // Components:
@@ -21,10 +21,14 @@ const TodoList = (props) => {
     )
 }
 
+const mapStateToProps = (state) => {
+    return {
+        list: state.todos
+    }
+}
+
 TodoList.propTypes = {
     list: PropTypes.array
 }
 
-
-
-export default TodoList
+export default connect(mapStateToProps)(TodoList)

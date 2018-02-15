@@ -30,7 +30,7 @@ class Home extends React.Component {
                             onClick={this.add}>Add</button>
                     </div>
                 </div>
-                <TodoList list={this.props.todos}/>
+                <TodoList />
             </div>
         )
     }
@@ -65,12 +65,6 @@ class Home extends React.Component {
     }
 }
 
-const mapStateToProps = (state) => {
-    return {
-        todos: state.todos
-    }
-}
-
 const mapDispatchToProps = (dispatch) => {
     return {
         addNewItem(item) {
@@ -84,4 +78,4 @@ Home.propTypes = {
     addNewItem: PropTypes.func
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Home)
+export default connect(null, mapDispatchToProps)(Home)
