@@ -1,3 +1,5 @@
+import ActionTypes from 'states/actions/actionTypes'
+
 const initState = {
     todos: [
         {
@@ -5,31 +7,31 @@ const initState = {
             text: 'Shopping',
             isFinished: false
         },
-        {
-            id: 2,
-            text: 'Working',
-            isFinished: false
-        },
-        {
-            id: 3,
-            text: 'Meeting with Jane Doe',
-            isFinished: false
-        }
+        // {
+        //     id: 2,
+        //     text: 'Working',
+        //     isFinished: false
+        // },
+        // {
+        //     id: 3,
+        //     text: 'Meeting with Jane Doe',
+        //     isFinished: false
+        // }
     ]
 }
 
 const reducer = (state = initState, action) => {
     let copy = Object.assign({}, state)
     switch(action.type) {
-        case 'ADD_ITEM':
+        case ActionTypes['ADD_ITEM']:
             copy.todos = copy.todos.concat([action.payload])
             return Object.assign({}, copy)
-        case 'DELETE_ITEM':
+        case ActionTypes['DELETE_ITEM']:
             copy.todos = copy.todos.filter(item => {
                 return item.id !== action.payload
             })
             return Object.assign({}, copy)
-        case 'EDIT_ITEM': {
+        case ActionTypes['EDIT_ITEM']: {
             copy.todos = copy.todos.map(item => {
                 if (item.id === action.payload.id) {
                     return {
@@ -44,7 +46,7 @@ const reducer = (state = initState, action) => {
 
             return Object.assign({}, copy)
         }
-        case 'TOGGLE_ITEM': {
+        case ActionTypes['TOGGLE_ITEM']: {
             copy.todos = copy.todos.map(item => {
                 if (item.id === action.payload.id) {
                     return {

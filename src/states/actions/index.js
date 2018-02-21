@@ -1,3 +1,5 @@
+import ActionTypes from './actionTypes'
+
 function createAction(type) {
     return function(payload) {
         return {
@@ -8,10 +10,10 @@ function createAction(type) {
 }
 
 // sync actions:
-const addItem = createAction('ADD_ITEM')
-const deleteItem = createAction('DELETE_ITEM')
-const editItem = createAction('EDIT_ITEM')
-const toggleItem = createAction('TOGGLE_ITEM')
+const addItem = createAction(ActionTypes['ADD_ITEM'])
+const deleteItem = createAction(ActionTypes['DELETE_ITEM'])
+const editItem = createAction(ActionTypes['EDIT_ITEM'])
+const toggleItem = createAction(ActionTypes['TOGGLE_ITEM'])
 
 // async actions:
 const saveItem = (payload) => {
