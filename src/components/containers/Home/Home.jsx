@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import moment from 'moment'
 // Actions:
-import { addItem } from 'states/actions'
+import { addItem, saveItem } from 'states/actions'
 import styles from './Home.scss'
 
 // Components:
@@ -56,7 +56,8 @@ class Home extends React.Component {
             isFinished: false
         }
 
-        this.props.addNewItem(payload)
+        // this.props.addNewItem(payload)
+        this.props.saveItem(payload)
         setTimeout(() => {
             this.setState({
                 isLock: false
@@ -69,13 +70,17 @@ const mapDispatchToProps = (dispatch) => {
     return {
         addNewItem(item) {
             return dispatch(addItem(item))
+        },
+        saveItem(item) {
+            return dispatch(saveItem(item))
         }
     }
 }
 
 Home.propTypes = {
     todos: PropTypes.array,
-    addNewItem: PropTypes.func
+    addNewItem: PropTypes.func,
+    saveItem: PropTypes.func
 }
 
 export default connect(null, mapDispatchToProps)(Home)

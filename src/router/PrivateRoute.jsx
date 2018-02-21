@@ -18,10 +18,10 @@ const routes = (props) => {
         <div style={styles}>
             <Topbar userInfo={userinfo} />
             <Switch>
-                <Route path={props.match.url + '/home/:id'}
+                <Route path={props.match.url + '/home'}
                     component={Home} />
 
-                {/* <Redirect from="/main" to="/main/home"/> */}
+                <Redirect from="/main" to="/main/home"/>
             </Switch>
         </div>
     )
