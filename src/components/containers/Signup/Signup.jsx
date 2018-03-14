@@ -26,6 +26,17 @@ export default class Signup extends React.Component {
                             onBlur={this.validate}
                             onChange={this.handleChange} />
 
+                        <Input placeholder="Create a User Name"
+                            className="mb-3"
+                            type="text"
+                            name="username"
+                            data-name="Username"
+                            touched={this.state.formData.username.touched}
+                            hasErr={!this.state.formData.username.isValid}
+                            errMsg={this.state.formData.username.errMsg}
+                            onBlur={this.validate}
+                            onChange={this.handleChange} />
+
                         <Input placeholder="Create a Password"
                             className="mb-3"
                             type="password"
@@ -71,6 +82,16 @@ export default class Signup extends React.Component {
                 rules: [
                     validateRules.required,
                     validateRules.isEmail
+                ],
+                errMsg: ''
+            },
+            username: {
+                value: '',
+                isValid: false,
+                touched: false,
+                rules: [
+                    validateRules.required,
+                    validateRules.maxLength(30),
                 ],
                 errMsg: ''
             },

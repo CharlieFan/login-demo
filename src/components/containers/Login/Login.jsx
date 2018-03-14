@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom'
 import { Input } from 'components/ui'
 import styles from './Login.scss'
 import {validator, validateRules} from 'utils/validation'
+import api from 'api'
+console.log(api)
 
 export default class Login extends React.Component {
     render() {
@@ -123,10 +125,13 @@ export default class Login extends React.Component {
         }
 
         console.log(formData)
-        let id = 1
-        this.props.history.push({
-            pathname: '/main/home/' + id
+        api.user.login(formData).then(res => {
+            console.log(res)
         })
+        // let id = 1
+        // this.props.history.push({
+        //     pathname: '/main/home/' + id
+        // })
     }
 }
 

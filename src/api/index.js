@@ -7,7 +7,9 @@ export default {
          * @param data 
          */
         async login(data) {
-            let res = await post('', data)
+            let res = await post('/login', data)
+            console.log(res)
+            
             return res
         },
 
