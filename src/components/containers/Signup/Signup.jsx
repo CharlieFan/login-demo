@@ -1,4 +1,5 @@
 import React from 'react'
+import api from 'api'
 import { Link } from 'react-router-dom'
 import { Input } from 'components/ui'
 import {validator, validateRules} from 'utils/validation'
@@ -183,6 +184,17 @@ export default class Signup extends React.Component {
             return false
         }
 
-        console.log('call api')
+        let data = {
+            username: this.state.formData.username.value,
+            email: this.state.formData.email.value,
+            password: this.state.formData.password.value,
+        }
+        console.log('call api:', data)
+        try {
+            let res = await this.api.user.signup(data)
+            console.log(res)
+        } catch (err) {
+            console.log(err)
+        }
     }
 }

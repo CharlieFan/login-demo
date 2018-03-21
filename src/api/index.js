@@ -23,11 +23,17 @@ export default {
 
         /**
          * signup api
-         * @para data
+         * @param data
          */
         async signup(data) {
-            let res = await post('/signup', data)
-            return res
+            try {
+                let res = await post('/signup', data)
+                if (res) {
+                    return res
+                }
+            } catch (err) {
+                throw err
+            }
         }
     }
 }
