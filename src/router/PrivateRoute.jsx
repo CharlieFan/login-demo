@@ -4,11 +4,6 @@ import { Route, Switch, Redirect } from 'react-router-dom'
 import Home from 'components/containers/Home/Home'
 import { Topbar } from 'components/ui'
 
-const userinfo = {
-    name: 'UserName',
-    email: 'username@example.com'
-}
-
 const styles = {
     marginTop: '50px'
 }
@@ -16,7 +11,7 @@ const styles = {
 const routes = (props) => {
     return (
         <div style={styles}>
-            <Topbar userInfo={userinfo} />
+            <Topbar />
             <Switch>
                 <Route path={props.match.url + '/home'}
                     component={Home} />

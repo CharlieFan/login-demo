@@ -22,8 +22,6 @@ const TodoList = (props) => {
 }
 
 const mapStateToProps = (state) => {
-    console.log(state)
-    
     return {
         list: state.todos.todos
     }

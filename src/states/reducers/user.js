@@ -1,7 +1,7 @@
 import ActionTypes from 'states/actions/userActions/types'
 const initState = {
-    username: 'somebody',
-    email: 'somebody@example.com'
+    username: '',
+    email: ''
 }
 
 const reducer = (state = initState, action) => {

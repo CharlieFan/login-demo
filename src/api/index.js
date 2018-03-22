@@ -10,13 +10,11 @@ export default {
         async login(data) {
             try {
                 let res = await post('/login', data)
-                console.log(res)
                 if (res.token) {
                     storage.setValue('client', res.token)
                     return res.data
                 }
             } catch (err) {
-                console.log(err)
                 throw err
             }
         },
@@ -28,13 +26,11 @@ export default {
         async signup(data) {
             try {
                 let res = await post('/signup', data)
-                console.log(res)
                 if (res && res.token) {
                     storage.setValue('client', res.token)
                     return res.data
                 }
             } catch (err) {
-                console.log(err)
                 throw err
             }
         },
@@ -45,10 +41,8 @@ export default {
         async getUserInfo() {
             try {
                 let res = await get('/getUserInfo')
-                console.log(res)
-                return res.data
+                return res
             } catch (err) {
-                console.log(err)
                 throw err
             }
         }

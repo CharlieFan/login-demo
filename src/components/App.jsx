@@ -21,7 +21,6 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 // Create Store: 
 const store = createStore(reducer, composeEnhancers(applyMiddleware(thunk)))
 
-console.log(store);
 export default class App extends React.Component {
     render() {
         return (

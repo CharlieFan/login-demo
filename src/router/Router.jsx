@@ -11,7 +11,6 @@ import Signup from 'components/containers/Signup/Signup'
 
 const routes = () => {
     let token = storage.getValue('client')
-    // token = 'jkdslf'
 
     return (
         <BrowserRouter>

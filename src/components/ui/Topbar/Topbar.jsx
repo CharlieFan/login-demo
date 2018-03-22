@@ -1,25 +1,47 @@
-import React from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+import { userActions } from 'states/actions'
 import styles from './Topbar.scss'
 
-const Topbar = (props) => {
-    // console.log(props)
-    
-    return (
-        <div className={styles.topbar}>
-            <div>
-                Hello! { props.userInfo.name}
+class Topbar extends Component {
+    render() {
+        return (
+            <div className={styles.topbar}>
+                <div>
+                    Hello! { this.props.userInfo.username } ({ this.props.userInfo.email })
+                </div>
+                <div></div>
             </div>
-            <div></div>
-        </div>
-    )
+        )
+    }
+
+    componentDidMount() {
+        this.props.getUserInfo()
+    }
+}
+
+const mapStateToProps = (state) => {
+    console.log(state)
+    return {
+        userInfo: state.user
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        getUserInfo() {
+            return dispatch(userActions.getUserInfo())
+        }
+    }
 }
 
 Topbar.propTypes = {
     userInfo: PropTypes.shape({
-        name: PropTypes.string,
+        username: PropTypes.string,
         email: PropTypes.string
-    })
+    }),
+    getUserInfo: PropTypes.func
 }
 
-export default Topbar
+export default connect(mapStateToProps, mapDispatchToProps)(Topbar)

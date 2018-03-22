@@ -125,10 +125,14 @@ export default class Login extends React.Component {
         console.log(formData)
 
         try {
-            await api.user.login(formData)
-            this.props.history.push({
-                pathname: '/main/home/'
-            })
+            let res = await api.user.login(formData)
+            console.log(res)
+            if (res) {
+                this.props.history.push({
+                    pathname: '/main/home/'
+                })
+            }
+            
         } catch (err) {
             return false
         }

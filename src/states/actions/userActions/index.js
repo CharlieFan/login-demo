@@ -9,6 +9,8 @@ const updateUserInfo = createAction(ActionTypes['UPDATE_USER_INFO'])
 const getUserInfo = () => {
     return async (dispatch) => {
         let res = await api.user.getUserInfo()
+        console.log(res)
+        
         dispatch(updateUserInfo(res))
     }
 }

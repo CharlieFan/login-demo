@@ -1,5 +1,7 @@
 import todoActions from './todoActions'
+import userActions from './userActions'
 
 export {
-    todoActions
+    todoActions,
+    userActions
 }
