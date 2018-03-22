@@ -23,7 +23,7 @@ const get = function (url, query = {}) {
         } 
     }).catch(err => {
         console.log(err)
-        return err
+        errorHandler(err)
     })
 }
 
@@ -42,8 +42,20 @@ const post = function (url, data) {
             }
         })
         .catch(err => {
-            throw err
+            errorHandler(err)
         })
+}
+
+const errorHandler = function(err) {
+    // console.log(JSON.parse(JSON.stringify(err)));
+    console.log(err.response)
+    let code = err.response.status
+    let msg = err.response.data.message
+
+    if (code === 401) {
+        storage.removeValue('client')
+    }
+    throw new Error(msg)
 }
 
 export {

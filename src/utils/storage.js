@@ -8,7 +8,12 @@ const getValue = (key) => {
     return JSON.parse(value)
 }
 
+const removeValue = (key) => {
+    localStorage.removeItem(key)
+}
+
 export default {
     setValue,
-    getValue
+    getValue,
+    removeValue
 }

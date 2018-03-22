@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import api from 'api'
 import { Link } from 'react-router-dom'
 import { Input } from 'components/ui'
@@ -189,12 +190,20 @@ export default class Signup extends React.Component {
             email: this.state.formData.email.value,
             password: this.state.formData.password.value,
         }
-        console.log('call api:', data)
+        console.log('signup data:', data)
         try {
-            let res = await this.api.user.signup(data)
+            let res = await api.user.signup(data)
+            this.props.history.push({
+                pathname: '/main/home/'
+            })
             console.log(res)
+
         } catch (err) {
             console.log(err)
         }
     }
+}
+
+Signup.propTypes = {
+    history: PropTypes.object
 }

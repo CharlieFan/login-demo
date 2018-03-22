@@ -28,10 +28,27 @@ export default {
         async signup(data) {
             try {
                 let res = await post('/signup', data)
-                if (res) {
-                    return res
+                console.log(res)
+                if (res && res.token) {
+                    storage.setValue('client', res.token)
+                    return res.data
                 }
             } catch (err) {
+                console.log(err)
+                throw err
+            }
+        },
+
+        /**
+         * get user info api
+         */
+        async getUserInfo() {
+            try {
+                let res = await get('/getUserInfo')
+                console.log(res)
+                return res.data
+            } catch (err) {
+                console.log(err)
                 throw err
             }
         }

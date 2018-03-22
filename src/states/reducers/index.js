@@ -6,17 +6,7 @@ const initState = {
             id: 1,
             text: 'Shopping',
             isFinished: false
-        },
-        // {
-        //     id: 2,
-        //     text: 'Working',
-        //     isFinished: false
-        // },
-        // {
-        //     id: 3,
-        //     text: 'Meeting with Jane Doe',
-        //     isFinished: false
-        // }
+        }
     ]
 }
 
