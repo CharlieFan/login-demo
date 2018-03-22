@@ -3,7 +3,8 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import moment from 'moment'
 // Actions:
-import { addItem, saveItem } from 'states/actions'
+import { todoActions } from 'states/actions'
+
 import styles from './Home.scss'
 
 // Components:
@@ -69,10 +70,10 @@ class Home extends React.Component {
 const mapDispatchToProps = (dispatch) => {
     return {
         addNewItem(item) {
-            return dispatch(addItem(item))
+            return dispatch(todoActions.addItem(item))
         },
         saveItem(item) {
-            return dispatch(saveItem(item))
+            return dispatch(todoActions.saveItem(item))
         }
     }
 }

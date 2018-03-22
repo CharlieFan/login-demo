@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { deleteItem, editItem, toggleItem } from 'states/actions'
+import { todoActions } from 'states/actions'
 import styles from './TodoItem.scss'
 
 
@@ -99,13 +99,13 @@ TodoItem.propTypes = {
 const mapDispatchToProps = (dispatch) => {
     return {
         deleteItem(id) {
-            return dispatch(deleteItem(id))
+            return dispatch(todoActions.deleteItem(id))
         },
         editItem(id, text) {
-            return dispatch(editItem({ id, text }))
+            return dispatch(todoActions.editItem({ id, text }))
         },
         toggleItem(id) {
-            return dispatch(toggleItem({ id }))
+            return dispatch(todoActions.toggleItem({ id }))
         }
     }
 }
