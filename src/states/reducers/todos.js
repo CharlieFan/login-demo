@@ -1,4 +1,4 @@
-import ActionTypes from 'states/actions/actionTypes'
+import ActionTypes from 'states/actions/todoActions/types'
 
 const initState = {
     todos: [

@@ -5,7 +5,6 @@ import { Input } from 'components/ui'
 import styles from './Login.scss'
 import {validator, validateRules} from 'utils/validation'
 import api from 'api'
-console.log(api)
 
 export default class Login extends React.Component {
     render() {
