@@ -132,7 +132,6 @@ export default class Login extends React.Component {
                     pathname: '/main/home/'
                 })
             }
-            
         } catch (err) {
             return false
         }
