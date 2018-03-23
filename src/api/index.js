@@ -20,6 +20,20 @@ export default {
         },
 
         /**
+         * logout api
+         */
+        async logout() {
+            try {
+                let res = await post('/logout')
+                storage.removeValue('client')
+                return res
+            } catch (err) {
+                storage.removeValue('client')
+                throw err
+            }
+        },
+
+        /**
          * signup api
          * @param data
          */

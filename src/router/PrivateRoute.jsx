@@ -13,7 +13,7 @@ const routes = (props) => {
     if (storage.getValue('client')) {
         return (
             <div style={styles}>
-                <Topbar />
+                <Topbar {...props} />
                 <Switch>
                     <Route path={props.match.url + '/home'}
                         component={Home} />
