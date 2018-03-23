@@ -23,12 +23,11 @@ const get = function (url, query = {}) {
         }
     }).then(res => {
         if (res) {
-            console.log(res)
-            
+            // console.log(res)
             return res.data
         } 
     }).catch(err => {
-        console.log(err)
+        // console.log(err)
         errorHandler(err)
     })
 }

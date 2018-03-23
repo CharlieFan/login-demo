@@ -37,7 +37,6 @@ class Topbar extends Component {
 }
 
 const mapStateToProps = (state) => {
-    console.log(state)
     return {
         userInfo: state.user
     }

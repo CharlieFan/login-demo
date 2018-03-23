@@ -190,16 +190,16 @@ export default class Signup extends React.Component {
             email: this.state.formData.email.value,
             password: this.state.formData.password.value,
         }
-        console.log('signup data:', data)
+        // console.log('signup data:', data)
         try {
-            let res = await api.user.signup(data)
+            await api.user.signup(data)
             this.props.history.push({
                 pathname: '/main/home/'
             })
-            console.log(res)
-
+            // console.log(res)
         } catch (err) {
-            console.log(err)
+            // console.log(err)
+            return false
         }
     }
 }

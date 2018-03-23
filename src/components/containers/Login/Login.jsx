@@ -122,11 +122,11 @@ export default class Login extends React.Component {
             email: email.value,
             password: password.value
         }
-        console.log(formData)
+        // console.log(formData)
 
         try {
             let res = await api.user.login(formData)
-            console.log(res)
+            // console.log(res)
             if (res) {
                 this.props.history.push({
                     pathname: '/main/home/'

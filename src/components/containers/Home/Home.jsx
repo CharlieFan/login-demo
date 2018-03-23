@@ -11,10 +11,6 @@ import styles from './Home.scss'
 import TodoList from './TodoList/TodoList'
 
 class Home extends React.Component {
-    componentDidMount() {
-        console.log(this.props)
-    }
-
     render() {
         return (
             <div className={styles.home_view}>
