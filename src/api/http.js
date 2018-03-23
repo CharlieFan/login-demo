@@ -5,8 +5,7 @@ const myAxios = axios.create({
     baseURL: 'http://localhost:3000/api',
     timeout: 20000,
     headers: {
-        'Content-Type': 'application/json',
-        'x-auth': storage.getValue('client')
+        'Content-Type': 'application/json'
     }
 })
 
@@ -15,7 +14,14 @@ function processData(data = {}) {
 }
 
 const get = function (url, query = {}) {
-    return myAxios.get(url, query).then(res => {
+    let token = storage.getValue('client')
+    
+    return myAxios.get(url, {
+        query,
+        headers: {
+            'x-auth': token || ''
+        }
+    }).then(res => {
         if (res) {
             console.log(res)
             
@@ -28,7 +34,13 @@ const get = function (url, query = {}) {
 }
 
 const post = function (url, data) {
-    return myAxios.post(url, processData(data))
+    let token = storage.getValue('client')
+
+    return myAxios.post(url, processData(data), {
+        headers: {
+            'x-auth': token || ''
+        }
+    })
         .then(res => {
             if (res) {
                 if (res.headers['x-auth']) {
@@ -48,12 +60,11 @@ const post = function (url, data) {
 
 const errorHandler = function(err) {
     // console.log(JSON.parse(JSON.stringify(err)));
-    console.log(err.response)
     let code = err.response.status
     let msg = err.response.data.message
 
     if (code === 401) {
-        storage.removeValue('client')
+        window.location.href = '/'
     }
     throw new Error(msg)
 }

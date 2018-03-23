@@ -1,6 +1,5 @@
 import React from 'react'
-import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom'
-import storage from 'utils/storage.js'
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
 
 // components:
 import PrivateRoute from './PrivateRoute'
@@ -9,22 +8,10 @@ import Signup from 'components/containers/Signup/Signup'
 
 
 const routes = () => {
-    let token = storage.getValue('client')
     return (
         <BrowserRouter>
             <Switch>
-                <Route path="/main" render={
-                    (props) => {
-                        // console.log(token)
-                        
-                        if (token) {
-                            return <PrivateRoute {...props} />
-                        } else {
-                            return <Redirect to="/" />
-                        }
-                    }
-                } />
-
+                <Route path="/main" component={PrivateRoute} />
                 <Route path="/signup" component={Signup} />
                 <Route path="/" component={Login} />
             </Switch>
