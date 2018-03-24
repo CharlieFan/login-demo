@@ -1,6 +1,6 @@
 import axios from 'axios'
 import storage from 'utils/storage'
-const baseURL = process.env.NODE_ENV === 'production' ? 'https://login-demo-express.herokuapp.com/api' : 'https://localhost:5000/api'
+const baseURL = process.env.NODE_ENV === 'production' ? 'https://login-demo-express.herokuapp.com/api' : 'http://localhost:5000/api'
 
 const myAxios = axios.create({
     baseURL: baseURL,
