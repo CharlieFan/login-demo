@@ -1,9 +1,10 @@
 import axios from 'axios'
 import storage from 'utils/storage'
-const baseURL = 'https://obscure-journey-77340.herokuapp.com'
+const baseURL = 'https://obscure-journey-77340.herokuapp.com/api'
+// const baseURL = null
 
 const myAxios = axios.create({
-    baseURL: baseURL || 'http://localhost:3000/api',
+    baseURL: baseURL || 'https://localhost:5000/api',
     timeout: 20000,
     headers: {
         'Content-Type': 'application/json'
