@@ -1,12 +1,13 @@
 import axios from 'axios'
 import storage from 'utils/storage'
+const baseURL = 'https://obscure-journey-77340.herokuapp.com/api'
 
 const myAxios = axios.create({
-    baseURL: 'http://localhost:3000/api',
+    baseURL: baseURL || 'https://localhost:3000/api',
     timeout: 20000,
     headers: {
         'Content-Type': 'application/json'
-    }
+    
 })
 
 function processData(data = {}) {
