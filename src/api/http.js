@@ -1,10 +1,9 @@
 import axios from 'axios'
 import storage from 'utils/storage'
-const baseURL = 'https://obscure-journey-77340.herokuapp.com/api'
-// const baseURL = null
+const baseURL = process.env.NODE_ENV === 'production' ? 'https://login-demo-express.herokuapp.com/api' : 'https://localhost:5000/api'
 
 const myAxios = axios.create({
-    baseURL: baseURL || 'https://localhost:5000/api',
+    baseURL: baseURL,
     timeout: 20000,
     headers: {
         'Content-Type': 'application/json'

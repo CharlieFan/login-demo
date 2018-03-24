@@ -5,6 +5,7 @@ const merge = require('webpack-merge')
 const common = require('./webpack.common')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
 // Create different css.
 
@@ -105,10 +106,14 @@ module.exports = merge(common, {
         new CleanWebpackPlugin(['dist'], {
             root: path.resolve(__dirname, '..')
         }),
+        extractVenderCss,
+        extractStyles,
         new webpack.optimize.CommonsChunkPlugin({
             names: ['vendor', 'manifest']
         }),
-        extractVenderCss,
-        extractStyles
+        new webpack.DefinePlugin({
+            'process.env.NODE_ENV': JSON.stringify('production')
+        }),
+        new UglifyJsPlugin()
     ]
 })
