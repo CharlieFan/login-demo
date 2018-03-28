@@ -18,7 +18,7 @@ const reducer = (state = initState, action) => {
             return Object.assign({}, copy)
         case ActionTypes['DELETE_ITEM']:
             copy.todos = copy.todos.filter(item => {
-                return item.todo_id !== action.payload
+                return item.todo_id !== action.payload.todo_id
             })
             return Object.assign({}, copy)
         case ActionTypes['EDIT_ITEM']: {

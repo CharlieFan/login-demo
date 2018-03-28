@@ -11,6 +11,7 @@ class Topbar extends Component {
         this.props.history.push({
             pathname: '/'
         })
+        window.location.reload()
     }
 
     render() {

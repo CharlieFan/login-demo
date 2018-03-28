@@ -105,7 +105,7 @@ TodoItem.propTypes = {
 const mapDispatchToProps = (dispatch) => {
     return {
         deleteItem(id) {
-            return dispatch(todoActions.deleteItem(id))
+            return dispatch(todoActions.dropItem({todo_id: id}))
         },
         editItem(id, content) {
             return dispatch(todoActions.saveItem({ id, content }))

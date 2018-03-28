@@ -33,5 +33,16 @@ export default {
         } catch (err) {
             throw err
         }
+    },
+    /**
+     * delete a todo
+     */
+    async deleteTodo(data) {
+        try {
+            let res = await post('/todos/delete', data)
+            return res
+        } catch(err) {
+            throw err
+        }
     }
 }

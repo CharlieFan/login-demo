@@ -22,7 +22,7 @@ const createItem = (payload) => {
     return async (dispatch) => {
         let res = await api.todo.addTodo(payload)
         if (res) {
-            payload = Object.assign({id: res.id}, payload)
+            payload = Object.assign({todo_id: res.id}, payload)
             dispatch(addItem(payload))
         } else {
             dispatch('NOTHING')
@@ -41,6 +41,17 @@ const saveItem = (payload) => {
     }
 }
 
+const dropItem = (payload) => {
+    return async (dispatch) => {
+        let res = await api.todo.deleteTodo(payload)
+        if (res) {
+            dispatch(deleteItem(payload))
+        } else {
+            dispatch('NOTHING')
+        }
+    }
+}
+
 export default {
     addItem,
     deleteItem,
@@ -48,5 +59,6 @@ export default {
     toggleItem,
     saveItem,
     createItem,
-    initList
+    initList,
+    dropItem
 }
