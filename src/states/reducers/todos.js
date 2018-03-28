@@ -23,11 +23,11 @@ const reducer = (state = initState, action) => {
             return Object.assign({}, copy)
         case ActionTypes['EDIT_ITEM']: {
             copy.todos = copy.todos.map(item => {
-                if (item.id === action.payload.id) {
+                if (item.todo_id === action.payload.todo_id) {
                     return {
-                        id: item.id,
-                        text: action.payload.text,
-                        isFinished: item.isFinished
+                        id: item.todo_id,
+                        content: action.payload.content,
+                        finish: action.payload.finish
                     }
                 } else {
                     return item

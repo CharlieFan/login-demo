@@ -52,13 +52,12 @@ class Home extends React.Component {
             isLock: true
         })
         let payload = {
-            id: moment().valueOf(),
-            text: this.state.text,
-            isFinished: false
+            content: this.state.text,
+            finish: 0
         }
 
         // this.props.addNewItem(payload)
-        this.props.saveItem(payload)
+        this.props.createItem(payload)
         setTimeout(() => {
             this.setState({
                 isLock: false
@@ -69,11 +68,8 @@ class Home extends React.Component {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        addNewItem(item) {
-            return dispatch(todoActions.addItem(item))
-        },
-        saveItem(item) {
-            return dispatch(todoActions.saveItem(item))
+        createItem(item) {
+            return dispatch(todoActions.createItem(item))
         },
         initList() {
             return dispatch(todoActions.initList())
@@ -83,7 +79,7 @@ const mapDispatchToProps = (dispatch) => {
 
 Home.propTypes = {
     todos: PropTypes.array,
-    addNewItem: PropTypes.func,
+    createItem: PropTypes.func,
     saveItem: PropTypes.func,
     initList: PropTypes.func
 }

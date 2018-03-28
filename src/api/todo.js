@@ -12,4 +12,26 @@ export default {
             throw err
         }
     },
+    /**
+     * add a todo
+     */
+    async addTodo(data) {
+        try {
+            let res = await post('/todos/add', data)
+            return res
+        } catch (err) {
+            throw err
+        }
+    },
+    /**
+     * edit a todo
+     */
+    async editTodo(data) {
+        try {
+            let res = await post('/todos/edit', data)
+            return res
+        } catch (err) {
+            throw err
+        }
+    }
 }

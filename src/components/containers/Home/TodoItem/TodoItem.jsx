@@ -19,20 +19,20 @@ class TodoItem extends React.Component {
 
         let editInput = (
             <input type="text"
-                value={this.state.text}
+                value={this.state.content}
                 onChange={(e) => { this.handleChange(e.target.value) }}/>
         )
 
         return (
             <li className={`d-flex justify-content-between ${styles.todo_item}`}>
-                <input type="checkbox" value={this.state.isFinished}
-                    onChange={this.toggoleFinish} />
+                <input type="checkbox" value={this.state.finish}
+                    onChange={(e) => { this.toggoleFinish(e.target.value) }} />
 
-                <p className={this.props.item.isFinished ? styles.finished : ''}>
+                <p className={this.props.item.finish === 1 ? styles.finished : ''}>
                     {
                         this.state.isEdit ?
                             editInput :
-                            this.state.text
+                            this.state.content
                     }
                 </p>
 
@@ -51,22 +51,28 @@ class TodoItem extends React.Component {
     }
 
     state = {
-        text: this.props.item.text,
+        content: this.props.item.content,
+        finish: this.props.item.finish === 1,
         isEdit: false,
     }
 
     handleChange = (value) => {
         this.setState({
-            text: value
+            content: value
         })
     }
 
-    toggoleFinish = () => {
-        this.props.toggleItem(this.props.item.id)
+    toggoleFinish = (value) => {
+        console.log(value)
+        this.setState({
+            finish: value
+        })
+        
+        // this.props.toggleItem(this.props.item.todo_id)
     }
 
     enableEdit = () => {
-        console.log(this.props.item.id)
+        console.log(this.props.item.todo_id)
         
         this.setState({
             isEdit: true
@@ -84,7 +90,7 @@ class TodoItem extends React.Component {
     }
 
     editItem = () => {
-        this.props.editItem(this.props.item.id, this.state.text)
+        this.props.editItem(this.props.item.todo_id, this.state.content)
         this.disableEdit()
     }
 }
@@ -101,8 +107,8 @@ const mapDispatchToProps = (dispatch) => {
         deleteItem(id) {
             return dispatch(todoActions.deleteItem(id))
         },
-        editItem(id, text) {
-            return dispatch(todoActions.editItem({ id, text }))
+        editItem(id, content) {
+            return dispatch(todoActions.saveItem({ id, content }))
         },
         toggleItem(id) {
             return dispatch(todoActions.toggleItem({ id }))

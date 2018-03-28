@@ -14,22 +14,30 @@ const updateList = createAction(ActionTypes['UPDATE_LIST'])
 const initList = () => {
     return async (dispatch) => {
         let res = await api.todo.getList()
-        res = res.map((item) => {
-            return {
-                id: item.todo_id,
-                text: item.content,
-                isFinished: item.finished === 1
-            }
-        })
         dispatch(updateList(res))
     }
 }
 
-const saveItem = (payload) => {
-    return (dispatch) => {
-        setTimeout(() => {
+const createItem = (payload) => {
+    return async (dispatch) => {
+        let res = await api.todo.addTodo(payload)
+        if (res) {
+            payload = Object.assign({id: res.id}, payload)
             dispatch(addItem(payload))
-        }, 200)
+        } else {
+            dispatch('NOTHING')
+        }
+    }
+}
+
+const saveItem = (payload) => {
+    return async (dispatch) => {
+        let res = await api.todo.editTodo(payload)
+        if (res) {
+            dispatch(editItem(payload))
+        } else {
+            dispatch('NOTHING')
+        }
     }
 }
 
@@ -39,5 +47,6 @@ export default {
     editItem,
     toggleItem,
     saveItem,
+    createItem,
     initList
 }

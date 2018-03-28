@@ -9,7 +9,7 @@ import TodoItem from '../TodoItem/TodoItem'
 const TodoList = (props) => {
     let items = props.list.map(item => {
         return (
-            <TodoItem key={item.id} item={item} />
+            <TodoItem key={item.todo_id} item={item} />
         )
     })
     
