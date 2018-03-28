@@ -25,10 +25,10 @@ class TodoItem extends React.Component {
 
         return (
             <li className={`d-flex justify-content-between ${styles.todo_item}`}>
-                <input type="checkbox" value={this.state.finish}
-                    onChange={(e) => { this.toggoleFinish(e.target.value) }} />
+                <input type="checkbox" checked={this.state.finish}
+                    onChange={this.toggoleFinish} />
 
-                <p className={this.props.item.finish === 1 ? styles.finished : ''}>
+                <p className={this.state.finish ? styles.finished : ''}>
                     {
                         this.state.isEdit ?
                             editInput :
@@ -62,13 +62,13 @@ class TodoItem extends React.Component {
         })
     }
 
-    toggoleFinish = (value) => {
-        console.log(value)
+    toggoleFinish = () => {
         this.setState({
-            finish: value
+            finish: !this.state.finish
+        }, () => {
+            let finish = this.state.finish ? 1 : 0
+            this.props.toggleItem(this.props.item.todo_id, this.props.item.content, finish)
         })
-        
-        // this.props.toggleItem(this.props.item.todo_id)
     }
 
     enableEdit = () => {
@@ -86,7 +86,7 @@ class TodoItem extends React.Component {
     }
     
     deleteItem = () => {
-        this.props.deleteItem(this.props.item.id)
+        this.props.deleteItem(this.props.item.todo_id)
     }
 
     editItem = () => {
@@ -110,8 +110,9 @@ const mapDispatchToProps = (dispatch) => {
         editItem(id, content) {
             return dispatch(todoActions.saveItem({ id, content }))
         },
-        toggleItem(id) {
-            return dispatch(todoActions.toggleItem({ id }))
+        toggleItem(id, content, finish) {
+            // return dispatch(todoActions.toggleItem({ id }))
+            return dispatch(todoActions.saveItem({ id, content, finish }))
         }
     }
 }
