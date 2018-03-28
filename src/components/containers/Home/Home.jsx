@@ -11,6 +11,10 @@ import styles from './Home.scss'
 import TodoList from './TodoList/TodoList'
 
 class Home extends React.Component {
+    componentDidMount() {
+        this.props.initList()
+    }
+
     render() {
         return (
             <div className={styles.home_view}>
@@ -70,6 +74,9 @@ const mapDispatchToProps = (dispatch) => {
         },
         saveItem(item) {
             return dispatch(todoActions.saveItem(item))
+        },
+        initList() {
+            return dispatch(todoActions.initList())
         }
     }
 }
@@ -77,7 +84,8 @@ const mapDispatchToProps = (dispatch) => {
 Home.propTypes = {
     todos: PropTypes.array,
     addNewItem: PropTypes.func,
-    saveItem: PropTypes.func
+    saveItem: PropTypes.func,
+    initList: PropTypes.func
 }
 
 export default connect(null, mapDispatchToProps)(Home)

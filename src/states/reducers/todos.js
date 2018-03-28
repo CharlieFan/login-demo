@@ -2,11 +2,11 @@ import ActionTypes from 'states/actions/todoActions/types'
 
 const initState = {
     todos: [
-        {
-            id: 1,
-            text: 'Shopping',
-            isFinished: false
-        }
+        // {
+        //     id: 1,
+        //     text: 'Shopping',
+        //     isFinished: false
+        // }
     ]
 }
 
@@ -49,6 +49,12 @@ const reducer = (state = initState, action) => {
                 }
             })
 
+            return Object.assign({}, copy)
+        }
+        case ActionTypes['UPDATE_LIST']: {
+            copy.todos = copy.todos.concat(action.payload)
+            console.log(copy.todos)
+            
             return Object.assign({}, copy)
         }
         default:
